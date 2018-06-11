@@ -1,0 +1,41 @@
+.container, body, html {
+	font-family: Arial;
+	height: 100%;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, tr {
+	border: 1px solid #aaa;
+	text-align: left;
+	padding: 20px;
+}
+
+tr:nth-child(even) {
+	background: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
