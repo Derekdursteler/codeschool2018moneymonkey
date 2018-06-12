@@ -17,11 +17,11 @@
 
 			<input v-model="description" type="text" placeholder="Description">
 
+			<input v-model="amount" type="text" placeholder="Amount">
+
 			<div v-cloak class="error" v-if="!valid.description">
 				<b>Enter a valid description</b>
 			</div>
-
-			<input v-model="amount" type="text" placeholder="Amount">
 
 			<div v-cloak class="error" v-if="!valid.amount">
 				<b>Enter a valid amount</b>
