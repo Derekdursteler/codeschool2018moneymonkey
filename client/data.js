@@ -1,18 +1,36 @@
 const data = {
 	message: 'Welcome!',
+	description: '',
+	amount: '',
 	expenses: [
 		{
 			amount: 15.06,
-		 	description: 'Groceries'
+		 	description: 'Groceries',
+		 	date: moment().subtract(1, 'days').format('MMMM Do, YYYY')
 		},
 		{
 			amount: 10.99,
-			description: 'Movie Ticket'
+			description: 'Movie Ticket',
+			date: moment().subtract(5, 'days').format('MMMM Do, YYYY')
 		},
 		{
 			amount: 29.99,
-			description: 'Oil Change'
+			description: 'Oil Change',
+			date: moment().subtract(10, 'days').format('MMMM Do, YYYY')
 		}
 	]
 }
+
+export default data
+
+
+
+
+
+
+
+
+
+
+
 

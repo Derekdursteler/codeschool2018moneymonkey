@@ -13,10 +13,21 @@
 
 			<h2>Expenses</h2>
 
+		<div class="row">
+
+			<input v-model="description" type="text" placeholder="Description">
+
+			<input v-model="amount" type="text" placeholder="Amount">
+
+			<button @click="clicked">Add Item</button>
+
+		</div>
+
 			<table>
 				<tr>
 					<th>Description</th>
 					<th>Amount</th>
+					<th>Date</th>
 				</tr>
 				<tr v-for="expense in expenses">
 					<td>
@@ -25,16 +36,20 @@
 					<td>
 						${{ expense.amount }}
 					</td>
+					<td>
+						{{ expense.date }}
+					</td>
 				</tr>
 			</table>
 
 		</div>
 
 		<script src="vue.js"></script>
+		<script src="moment.js"></script>
 
-		<script src="data.js"></script>
 
-		<script src="main.js"></script>
+		<script src="data.js" type="module"></script>
+		<script src="main.js" type="module"></script>
 		
 
 	</body>
