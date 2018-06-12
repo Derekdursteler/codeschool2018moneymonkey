@@ -2,6 +2,10 @@ const data = {
 	message: 'Welcome!',
 	description: '',
 	amount: '',
+	valid: {
+		description: true,
+		amount: true
+	},
 	expenses: [
 		{
 			amount: 15.06,
