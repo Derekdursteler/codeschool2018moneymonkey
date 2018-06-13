@@ -34,15 +34,18 @@
 
 		</form>
 
-
+		<h2>Total Expenses <span id="total">${{ total }}</span></h2>
 
 		</div>
+
+		<div id="expenses">
 
 			<table>
 				<tr>
 					<th>Description</th>
 					<th>Amount</th>
 					<th>Date</th>
+					<th>Actions</th>
 				</tr>
 				<tr v-for="expense in expenses">
 					<td>
@@ -54,8 +57,13 @@
 					<td>
 						{{ expense.date }}
 					</td>
+					<td>
+						<button class="delete" @click="deleteExpense(expense.id)">Delete</button>
+					</td>
 				</tr>
 			</table>
+
+		</div>
 
 		</div>
 

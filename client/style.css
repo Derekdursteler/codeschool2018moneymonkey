@@ -1,6 +1,7 @@
 .container, body, html {
 	font-family: Arial;
 	height: 100%;
+	text-align: center;
 }
 
 .container {
@@ -8,6 +9,13 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+#total {
+	color: lightgreen;
+	background-color: darkslateblue;
+	border-radius: 5px;
+	padding: 5px;
 }
 
 .row {
@@ -61,6 +69,15 @@ td, tr {
 
 tr:nth-child(even) {
 	background: #ddd;
+}
+
+#expenses {
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.delete {
+	background-color: lightcoral;
 }
 
 
