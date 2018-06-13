@@ -14,8 +14,14 @@ const app = new Vue({
 			}
 
 			for(const key in this.valid) {
-				if (!this.valid[key])
+				if (!this.valid[key]) {
+					const refString = key + 'Ref'
+					const ref = this.$refs[refString]
+					setTimeout(() => {
+						ref.select()
+					}, 0)
 					return false
+				}
 			}
 
 			return true
@@ -30,7 +36,7 @@ const app = new Vue({
 				this.description = ''
 				this.amount = ''
 			}
-
+			this.$refs.descriptionRef.focus()
 		},
 		clear() {
 			this.description = ''

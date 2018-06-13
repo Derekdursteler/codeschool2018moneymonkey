@@ -15,9 +15,11 @@
 
 		<div class="row">
 
-			<input v-model="description" type="text" placeholder="Description">
+		<form @submit.prevent>
 
-			<input v-model="amount" type="text" placeholder="Amount">
+			<input ref="descriptionRef" v-model="description" type="text" placeholder="Description">
+
+			<input ref="amountRef" v-model="amount" type="text" placeholder="Amount">
 
 			<div v-cloak class="error" v-if="!valid.description">
 				<b>Enter a valid description</b>
@@ -27,9 +29,12 @@
 				<b>Enter a valid amount</b>
 			</div>
 
-			<button @click="clicked">Add Item</button>
+		<button @click="clicked">Add Item</button>
+		<button @click="clear">Clear</button>
 
-			<button @click="clear">Clear</button>
+		</form>
+
+
 
 		</div>
 
