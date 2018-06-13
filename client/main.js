@@ -21,6 +21,14 @@ const app = new Vue({
 		}
 	},
 	methods: {
+		setEditingId(id) {
+			this.expenseId = id
+			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+
+			this.description = this.expenses[indexOfExpense].description
+			this.amount = this.expenses[indexOfExpense].amount
+
+		},
 		isValid() {
 			this.valid = {
 				description: Boolean(this.description) ,
@@ -42,18 +50,43 @@ const app = new Vue({
 
 			return true
 		},
-		clicked() {
+		saveExpense() {
 			if (this.isValid()) {
-				this.expenses.unshift({
+				if (this.expenseId !== null) {
+					console.log('updating')
+					// we are editing an expense
+					this.updateExpense(this.expenseId)
+
+				} else {
+					console.log('adding')
+					// we are adding an expense
+					this.addExpense()
+
+				}
+				this.description = ''
+				this.amount = ''
+				this.$refs.descriptionRef.focus()
+			}
+		},
+		addExpense() {
+			this.expenses.unshift({
 					id: this.expenses.length + Math.random(),
 					description: this.description,
 					amount: Number(this.amount),
 					date: moment().format('MMMM Do, YYYY')
 				})
-				this.description = ''
-				this.amount = ''
-				this.$refs.descriptionRef.focus()
-			}
+		},
+		updateExpense(id) {
+			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+			
+			this.expenses.splice(indexOfExpense, 1, {
+				id,
+				description: this.description,
+				amount: Number(this.amount),
+				date: moment().format('MMMM Do, YYYY')
+			})
+
+			this.expenseId = null
 		},
 		deleteExpense(id) {
 			// functional way

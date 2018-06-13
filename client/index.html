@@ -29,7 +29,7 @@
 				<b>Enter a valid amount</b>
 			</div>
 
-		<button @click="clicked">Add Item</button>
+		<button @click="saveExpense">Save Item</button>
 		<button @click="clear">Clear</button>
 
 		</form>
@@ -38,7 +38,7 @@
 
 		</div>
 
-		<div id="expenses">
+		<div id="expenses" v-if="expenses.length">
 
 			<table>
 				<tr>
@@ -58,6 +58,7 @@
 						{{ expense.date }}
 					</td>
 					<td>
+						<button @click="setEditingId(expense.id)">Edit</button>
 						<button class="delete" @click="deleteExpense(expense.id)">Delete</button>
 					</td>
 				</tr>
