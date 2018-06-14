@@ -25,7 +25,7 @@ const app = new Vue({
 			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
 
 			this.description = this.expenses[indexOfExpense].description
-			this.amount = this.expenses[indexOfExpense].amount
+			this.amount = this.expenses[indexOfExpense].amount.toLocaleString()
 
 		},
 		isValid() {
@@ -78,7 +78,7 @@ const app = new Vue({
 			this.expenses.splice(indexOfExpense, 1, {
 				id,
 				description: this.description,
-				amount: Number(this.amount),
+				amount: Number(this.amount.replace(/,/g, '')),
 				date: moment().format('MMMM Do, YYYY')
 			})
 
