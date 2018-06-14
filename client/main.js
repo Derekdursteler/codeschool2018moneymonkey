@@ -1,8 +1,14 @@
 import data from './data.js'
+import api from './api.js'
 
 const app = new Vue({
 	el: '#app',
 	data,
+	created() {
+		api.getExpenses()
+			.then(expenses => this.expenses = expenses)
+			.catch(e => console.log(e))
+	},
 	watch: {
 		description() {
 			this.valid.description = true
