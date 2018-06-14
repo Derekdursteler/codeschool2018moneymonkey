@@ -31,7 +31,7 @@ const app = new Vue({
 		isValid() {
 			this.valid = {
 				description: Boolean(this.description),
-				amount: this.amount !== '' && /^([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+				amount: this.amount !== '' && /^,!([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
 			}
 
 			for(const key in this.valid) {
