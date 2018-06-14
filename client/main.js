@@ -31,7 +31,7 @@ const app = new Vue({
 		isValid() {
 			this.valid = {
 				description: Boolean(this.description),
-				amount: /^([0-9]{1,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+				amount: this.amount !== '' && /^([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
 			}
 
 			for(const key in this.valid) {
@@ -47,6 +47,8 @@ const app = new Vue({
 			return true
 		},
 		saveExpense() {
+			this.description = this.description.trim()
+			this.amount = this.amount.trim()
 			if (this.isValid()) {
 				if (this.expenseId !== null) {
 					console.log('updating')
