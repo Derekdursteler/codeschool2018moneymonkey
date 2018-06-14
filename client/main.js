@@ -17,7 +17,6 @@ const app = new Vue({
 			return this.expenses
 				.reduce((total, expense) =>
 					total + expense.amount, 0)
-				.toFixed(2)
 		}
 	},
 	methods: {
@@ -31,11 +30,8 @@ const app = new Vue({
 		},
 		isValid() {
 			this.valid = {
-				description: Boolean(this.description) ,
-				amount: (
-					Boolean(this.amount) &&
-					(!isNaN(Number(this.amount)))
-				)
+				description: Boolean(this.description),
+				amount: /^([0-9]{1,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
 			}
 
 			for(const key in this.valid) {
@@ -72,7 +68,7 @@ const app = new Vue({
 			this.expenses.unshift({
 					id: this.expenses.length + Math.random(),
 					description: this.description,
-					amount: Number(this.amount),
+					amount: Number(this.amount.replace(/,/g, '')),
 					date: moment().format('MMMM Do, YYYY')
 				})
 		},

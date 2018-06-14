@@ -34,7 +34,7 @@
 
 		</form>
 
-		<h2>Total Expenses <span id="total">${{ total }}</span></h2>
+		<h2>Total Expenses <span id="total">${{ total.toLocaleString() }}</span></h2>
 
 		</div>
 
@@ -52,7 +52,7 @@
 						{{ expense.description }}
 					</td>
 					<td>
-						${{ expense.amount }}
+						${{ expense.amount.toLocaleString() }}
 					</td>
 					<td>
 						{{ expense.date }}
