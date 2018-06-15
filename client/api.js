@@ -1,3 +1,14 @@
+const parseExpenses = () => {
+	const expenses = localStorage.getItem('expenses') || '[]'
+	const parsedExpenses = JSON.parse(expenses)
+	return parsedExpenses
+}
+
+const setExpenses = expenses => {
+	const stringifiedExpenses = JSON.stringify(expenses)
+	localStorage.setItem('expenses', stringifiedExpenses)
+}
+
 const getExpenses = () => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -9,34 +20,28 @@ const getExpenses = () => {
 
 const addExpense = expense => {
 	return new Promise((resolve, reject) => {
-		const expenses = localStorage.getItem('expenses') || '[]'
-		const parsedExpenses = JSON.parse(expenses)
+		const parsedExpenses = parseExpenses()
 		parsedExpenses.unshift(expense)
-		const stringifiedExpenses = JSON.stringify(parsedExpenses)
-		localStorage.setItem('expenses', stringifiedExpenses)
+		setExpenses(parsedExpenses)
 		resolve(expense)
 	})
 }
 
 const updateExpense = updatedExpense => {
 	return new Promise((resolve, reject) => {
-		const expenses = localStorage.getItem('expenses') || '[]'
-		const parsedExpenses = JSON.parse(expenses)
+		const parsedExpenses = parseExpenses()
 		const indexOfExpense = parsedExpenses.findIndex(expense => expense.id === updatedExpense.id)
 		parsedExpenses.splice(indexOfExpense, 1, updatedExpense)
-		const stringifiedExpenses = JSON.stringify(parsedExpenses)
-		localStorage.setItem('expenses', stringifiedExpenses)
+		setExpenses(parsedExpenses)
 		resolve(updatedExpense)
 	})
 }
 
 const deleteExpense = id => {
 	return new Promise((resolve, reject) => {
-		const expenses = localStorage.getItem('expenses') || '[]'
-		let parsedExpenses = JSON.parse(expenses)
+		let parsedExpenses = parseExpenses()
 		parsedExpenses = parsedExpenses.filter(expense => expense.id !== id)
-		const stringifiedExpenses = JSON.stringify(parsedExpenses)
-		localStorage.setItem('expenses', stringifiedExpenses)
+		setExpenses(parsedExpenses)
 		resolve()
 	})
 }
