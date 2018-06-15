@@ -30,8 +30,38 @@ const updateExpense = updatedExpense => {
 	})
 }
 
+const deleteExpense = id => {
+	return new Promise((resolve, reject) => {
+		const expenses = localStorage.getItem('expenses') || '[]'
+		let parsedExpenses = JSON.parse(expenses)
+		parsedExpenses = parsedExpenses.filter(expense => expense.id !== id)
+		const stringifiedExpenses = JSON.stringify(parsedExpenses)
+		localStorage.setItem('expenses', stringifiedExpenses)
+		resolve()
+	})
+}
+
 export default {
 	getExpenses,
 	addExpense,
-	updateExpense
+	updateExpense,
+	deleteExpense
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -100,8 +100,10 @@ const app = new Vue({
 		},
 		deleteExpense(id) {
 			// functional way
-			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
-			this.expenses.splice(indexOfExpense, 1)
+
+			api.deleteExpense(id)
+				.then(() => this.expenses = this.expenses.filter(expense => expense.id !== id))
+
 
 			// imperative way
 			/*for(let i = 0; i < this.expenses.length; i++) {
