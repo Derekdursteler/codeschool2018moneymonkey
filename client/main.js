@@ -84,16 +84,19 @@ const app = new Vue({
 				.catch(e => console.log(e))
 		},
 		updateExpense(id) {
-			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
-			
-			this.expenses.splice(indexOfExpense, 1, {
+			const updatedExpense = {
 				id,
 				description: this.description,
 				amount: Number(this.amount.replace(/,/g, '')),
 				date: moment().format('MMMM Do, YYYY')
-			})
+			}
 
-			this.expenseId = null
+			api.updateExpense(updatedExpense)
+				.then(expense => {
+					const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+					this.expenses.splice(indexOfExpense, 1, expense)
+					this.expenseId = null
+				})
 		},
 		deleteExpense(id) {
 			// functional way
