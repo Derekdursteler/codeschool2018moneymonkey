@@ -22,16 +22,19 @@ const app = new Vue({
 			// functional way
 			return this.expenses
 				.reduce((total, expense) =>
-					total + expense.amount, 0)
+					total + expense.amount * expense.quantity, 0)
+				.toLocaleString()
 		}
 	},
 	methods: {
 		setEditingId(id) {
 			this.expenseId = id
 			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+			const expense = this.expenses[indexOfExpense]
 
-			this.description = this.expenses[indexOfExpense].description
-			this.amount = this.expenses[indexOfExpense].amount.toLocaleString()
+			this.description = expense.description
+			this.amount = expense.amount.toLocaleString()
+			this.quantity = expense.quantity
 
 		},
 		isValid() {
@@ -69,6 +72,7 @@ const app = new Vue({
 				}
 				this.description = ''
 				this.amount = ''
+				this.quantity = '1'
 				this.$refs.descriptionRef.focus()
 			}
 		},
@@ -77,6 +81,7 @@ const app = new Vue({
 					id: this.expenses.length + Math.random(),
 					description: this.description,
 					amount: Number(this.amount.replace(/,/g, '')),
+					quantity: Number(this.quantity),
 					date: moment().format('MMMM Do, YYYY')
 			}
 			api.addExpense(expense)
@@ -88,6 +93,7 @@ const app = new Vue({
 				id,
 				description: this.description,
 				amount: Number(this.amount.replace(/,/g, '')),
+				quantity: Number(this.quantity),
 				date: moment().format('MMMM Do, YYYY')
 			}
 
@@ -115,6 +121,9 @@ const app = new Vue({
 		clear() {
 			this.description = ''
 			this.amount = ''
+			this.quantity = '1'
+			this.valid.description = true
+			this.valid.amount = true
 		}
 	}
 })

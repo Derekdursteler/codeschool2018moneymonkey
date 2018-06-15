@@ -21,6 +21,8 @@
 
 			<input ref="amountRef" v-model="amount" type="text" placeholder="Amount">
 
+			<input v-model="quantity" type="number" placeholder="Quantity" min="1" max="99">
+
 			<div v-cloak class="error" v-if="!valid.description">
 				<b>Enter a valid description</b>
 			</div>
@@ -34,7 +36,9 @@
 
 		</form>
 
-		<h2>Total Expenses <span id="total">${{ total.toLocaleString() }}</span></h2>
+		<div id="total-wrapper">
+			<h2>Total Expenses<h2><span id="total">${{ total }}</span></h2>
+		</div>
 
 		</div>
 
@@ -44,6 +48,7 @@
 				<tr>
 					<th>Description</th>
 					<th>Amount</th>
+					<th>Quantity</th>
 					<th>Date</th>
 					<th>Actions</th>
 				</tr>
@@ -53,6 +58,9 @@
 					</td>
 					<td>
 						${{ expense.amount.toLocaleString() }}
+					</td>
+					<td>
+						{{ expense.quantity }}
 					</td>
 					<td>
 						{{ expense.date }}

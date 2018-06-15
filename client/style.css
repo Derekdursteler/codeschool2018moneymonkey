@@ -18,6 +18,15 @@
 	padding: 5px;
 }
 
+#total-wrapper {
+	margin: 10px auto;
+	padding: 10px;
+	max-width: 250px;
+	overflow-x: scroll;
+	border-radius: 125px;
+	border: 2px solid lightgray;
+}
+
 .row {
 	flex-direction: row;
 	justify-content: space-evenly;
@@ -61,10 +70,15 @@ table {
 	max-width: 600px;
 }
 
-td, tr {
+td, tr, th {
 	border: 1px solid #aaa;
 	text-align: left;
 	padding: 20px;
+	max-width: 100px;
+}
+
+td {
+	overflow-x: scroll;
 }
 
 tr:nth-child(even) {
@@ -78,6 +92,11 @@ tr:nth-child(even) {
 
 .delete {
 	background-color: lightcoral;
+}
+
+#total-wrapper::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 
