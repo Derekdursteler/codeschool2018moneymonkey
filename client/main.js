@@ -73,12 +73,15 @@ const app = new Vue({
 			}
 		},
 		addExpense() {
-			this.expenses.unshift({
+			const expense = {
 					id: this.expenses.length + Math.random(),
 					description: this.description,
 					amount: Number(this.amount.replace(/,/g, '')),
 					date: moment().format('MMMM Do, YYYY')
-				})
+			}
+			api.addExpense(expense)
+				.then(expense => this.expenses.unshift(expense))
+				.catch(e => console.log(e))
 		},
 		updateExpense(id) {
 			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
