@@ -78,11 +78,9 @@ const app = new Vue({
 		},
 		addExpense() {
 			const expense = {
-					id: this.expenses.length + Math.random(),
 					description: this.description,
 					amount: Number(this.amount.replace(/,/g, '')),
 					quantity: Number(this.quantity),
-					date: moment().format('MMMM Do, YYYY')
 			}
 			api.addExpense(expense)
 				.then(expense => this.expenses.unshift(expense))
@@ -94,7 +92,6 @@ const app = new Vue({
 				description: this.description,
 				amount: Number(this.amount.replace(/,/g, '')),
 				quantity: Number(this.quantity),
-				date: moment().format('MMMM Do, YYYY')
 			}
 
 			api.updateExpense(updatedExpense)

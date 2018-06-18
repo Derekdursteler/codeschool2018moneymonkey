@@ -21,9 +21,14 @@ const getExpenses = () => {
 const addExpense = expense => {
 	return new Promise((resolve, reject) => {
 		const parsedExpenses = parseExpenses()
-		parsedExpenses.unshift(expense)
+		const generatedExpense = {
+			id: Math.random(),
+			date: moment().format('MMMM Do, YYYY'),
+			...expense
+		}
+		parsedExpenses.unshift(generatedExpense)
 		setExpenses(parsedExpenses)
-		resolve(expense)
+		resolve(generatedExpense)
 	})
 }
 
@@ -31,9 +36,13 @@ const updateExpense = updatedExpense => {
 	return new Promise((resolve, reject) => {
 		const parsedExpenses = parseExpenses()
 		const indexOfExpense = parsedExpenses.findIndex(expense => expense.id === updatedExpense.id)
-		parsedExpenses.splice(indexOfExpense, 1, updatedExpense)
+		const generatedExpense = {
+			date: moment().format('MMMM Do, YYYY'),
+			...updatedExpense
+		}
+		parsedExpenses.splice(indexOfExpense, 1, generatedExpense)
 		setExpenses(parsedExpenses)
-		resolve(updatedExpense)
+		resolve(generatedExpense)
 	})
 }
 
