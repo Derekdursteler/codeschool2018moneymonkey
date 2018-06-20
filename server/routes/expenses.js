@@ -12,7 +12,8 @@ router.post('/', expenseController.createExpense)
 
 
 // ELEMENT PATHS
-
+// a get to '/expenses/id'
+router.get('/:id', expenseController.getExpense)
 // a put to '/expenses/id'
 router.put('/:id', expenseController.updateExpense)
 // a delete to '/expenses/id'

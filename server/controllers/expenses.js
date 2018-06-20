@@ -1,32 +1,49 @@
 const moment = require('moment')
+const Expense = require('../models/expenses')
 
 module.exports = {
-	listExpenses: (req, res) => res.json(expenses),
+	listExpenses: (req, res) => {
+		Expense.find(req.query)
+			.then(expenses => res.json(expenses))
+	},
+	getExpense: (req, res) => {
+		Expense.findById(req.params.id)
+			.then(expense => res.json(expense))
+	},
 	createExpense: (req, res) => {
-		const expense = {
-			id: Math.random(),
+		Expense.create({
 			description: req.body.description,
 			amount: req.body.amount,
-			quantity: req.body.quantity,
-			date: moment().format('MMMM Do, YYYY')
-		}
-		expenses.unshift(expense)
-		res.status(201).send('created expense')
+			quantity: req.body.quantity
+		})
+			.then(expense => res.status(201).json(expense))
 	},
 	updateExpense: (req, res) => {
-		const indexOfExpense = expenses.findIndex(expense => expense.id == req.params.id)
-		const updatedExpense = {
-			id: expenses[indexOfExpense].id,
+		Expense.findByIdAndUpdate(req.params.id, {
 			description: req.body.description,
 			amount: req.body.amount,
-			quantity: req.body.quantity,
-			date: moment().format('MMMM Do, YYYY')
-		}
-		expenses.splice(indexOfExpense, 1, updatedExpense)
-		res.json(updatedExpense)
+			quantity: req.body.quantity
+		},
+		{ new: true }
+		)
+			.then(expense => res.json(expense))
 	},
 	deleteExpense: (req, res) => {
-		expenses = expenses.filter(expense => expense.id != req.params.id)
-		res.status(204).send()
+		Expense.findByIdAndRemove(req.params.id)
+			.then(() => res.status(204).send())
 	},
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
