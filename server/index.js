@@ -13,6 +13,7 @@ app.use(morgan('tiny'))
 app.use('/expenses', expensesRouter)
 
 app.use((req, res, next) => {
+	console.log('hello world')
 	switch(req.error.name) {
 		case 'ValidationError':
 			res.status(422).json({
