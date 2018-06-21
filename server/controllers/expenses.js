@@ -2,15 +2,15 @@ const moment = require('moment')
 const Expense = require('../models/expenses')
 
 module.exports = {
-	listExpenses: (req, res) => {
+	listExpenses: (req, res, next) => {
 		Expense.find(req.query)
 			.then(expenses => res.json(expenses))
 	},
-	getExpense: (req, res) => {
+	getExpense: (req, res, next) => {
 		Expense.findById(req.params.id)
 			.then(expense => res.json(expense))
 	},
-	createExpense: (req, res) => {
+	createExpense: (req, res, next) => {
 		Expense.create({
 			description: req.body.description,
 			amount: req.body.amount,
@@ -18,16 +18,11 @@ module.exports = {
 		})
 			.then(expense => res.status(201).json(expense))
 			.catch(e => {
-				switch(e.name) {
-					case 'ValidationError':
-						res.status(422).send()
-						break
-					default:
-						res.status(500).send()
-				}
+				req.error = e
+				next()
 			})
 	},
-	updateExpense: (req, res) => {
+	updateExpense: (req, res, next) => {
 		Expense.findByIdAndUpdate(req.params.id, {
 			description: req.body.description,
 			amount: req.body.amount,
@@ -37,7 +32,7 @@ module.exports = {
 		)
 			.then(expense => res.json(expense))
 	},
-	deleteExpense: (req, res) => {
+	deleteExpense: (req, res, next) => {
 		Expense.findByIdAndRemove(req.params.id)
 			.then(() => res.status(204).send())
 	},

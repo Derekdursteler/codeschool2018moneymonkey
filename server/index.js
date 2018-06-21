@@ -9,7 +9,20 @@ const expensesRouter = require('./routes/expenses')
 app.use(bodyParser.json())
 app.use(express.static(`${__dirname}/../client`))
 app.use(morgan('tiny'))
+
 app.use('/expenses', expensesRouter)
+
+app.use((req, res, next) => {
+	switch(req.error.name) {
+		case 'ValidationError':
+			res.status(422).json({
+				message: req.error.message
+			})
+		break
+		default:
+		res.status(500).send()
+	}
+})
 
 mongoose.connect('mongodb://localhost:27017/expenses')
 	.then(() => {
