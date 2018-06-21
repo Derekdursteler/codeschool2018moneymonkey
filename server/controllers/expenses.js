@@ -12,7 +12,13 @@ module.exports = {
 	},
 	getExpense: (req, res, next) => {
 		Expense.findById(req.params.id)
-			.then(expense => res.json(expense))
+			.then(expense => {
+				if (expense === null) {
+					res.status(404).send()
+					return
+				}
+				res.json(expense)
+			})
 			.catch(e => {
 				req.error = e
 				next()
@@ -33,6 +39,10 @@ module.exports = {
 	updateExpense: (req, res, next) => {
 		Expense.findById(req.params.id)
 			.then(expense => {
+				if (expense === null) {
+					res.status(404).send()
+					return
+				}
 				expense.description = req.body.description
 				expense.amount = req.body.amount
 				expense.quantity = req.body.quantity
