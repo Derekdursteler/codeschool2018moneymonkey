@@ -17,6 +17,15 @@ module.exports = {
 			quantity: req.body.quantity
 		})
 			.then(expense => res.status(201).json(expense))
+			.catch(e => {
+				switch(e.name) {
+					case 'ValidationError':
+						res.status(422).send()
+						break
+					default:
+						res.status(500).send()
+				}
+			})
 	},
 	updateExpense: (req, res) => {
 		Expense.findByIdAndUpdate(req.params.id, {

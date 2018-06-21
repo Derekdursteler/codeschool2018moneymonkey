@@ -2,11 +2,21 @@ const mongoose = require('mongoose')
 const moment = require('moment')
 
 const expenseSchema = mongoose.Schema({
-	description: String,
-	amount: Number,
-	quantity: Number,
+	description: {
+		type: String,
+		required: true,
+	},
+	amount: {
+		type: Number,
+		required: true
+	},
+	quantity: {
+		type: Number,
+		required: true
+	},
 	date: {
 		type: String,
+		required: true,
 		default: moment().format('MMMM Do, YYYY')
 	}
 })
