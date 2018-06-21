@@ -13,8 +13,9 @@ app.use(morgan('tiny'))
 app.use('/expenses', expensesRouter)
 
 app.use((req, res, next) => {
-	console.log('hello world')
-	switch(req.error.name) {
+	if (req.error) {
+		// Came from controller
+		switch(req.error.name) {
 		case 'ValidationError':
 			res.status(422).json({
 				message: req.error.message
@@ -22,6 +23,10 @@ app.use((req, res, next) => {
 		break
 		default:
 		res.status(500).send()
+		}
+	} else {
+		// We fell through
+		res.status(404).send()
 	}
 })
 
