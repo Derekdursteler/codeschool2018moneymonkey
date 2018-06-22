@@ -6,7 +6,7 @@ const app = new Vue({
 	data,
 	created() {
 		api.getExpenses()
-			.then(expenses => this.expenses = expenses)
+			.then(expenses => this.expenses = expenses.reverse())
 			.catch(e => console.log(e))
 	},
 	watch: {
@@ -102,23 +102,14 @@ const app = new Vue({
 				})
 		},
 		deleteExpense(id) {
-			// functional way
-
 			api.deleteExpense(id)
 				.then(() => this.expenses = this.expenses.filter(expense => expense._id !== id))
-
-
-			// imperative way
-			/*for(let i = 0; i < this.expenses.length; i++) {
-				if (this.expenses[i].id === id)
-					this.expenses.splice(i, 1)
-			}*/
-			
 		},
 		clear() {
 			this.description = ''
 			this.amount = ''
 			this.quantity = '1'
+			this.expenseId = null
 			this.valid.description = true
 			this.valid.amount = true
 		}
