@@ -29,7 +29,7 @@ const app = new Vue({
 	methods: {
 		setEditingId(id) {
 			this.expenseId = id
-			const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
 			const expense = this.expenses[indexOfExpense]
 
 			this.description = expense.description
@@ -78,9 +78,9 @@ const app = new Vue({
 		},
 		addExpense() {
 			const expense = {
-					description: this.description,
-					amount: Number(this.amount.replace(/,/g, '')),
-					quantity: Number(this.quantity),
+				description: this.description,
+				amount: Number(this.amount.replace(/,/g, '')),
+				quantity: Number(this.quantity),
 			}
 			api.addExpense(expense)
 				.then(expense => this.expenses.unshift(expense))
@@ -88,7 +88,7 @@ const app = new Vue({
 		},
 		updateExpense(id) {
 			const updatedExpense = {
-				id,
+				_id: id,
 				description: this.description,
 				amount: Number(this.amount.replace(/,/g, '')),
 				quantity: Number(this.quantity),
@@ -96,7 +96,7 @@ const app = new Vue({
 
 			api.updateExpense(updatedExpense)
 				.then(expense => {
-					const indexOfExpense = this.expenses.findIndex(expense => expense.id === id)
+					const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
 					this.expenses.splice(indexOfExpense, 1, expense)
 					this.expenseId = null
 				})
@@ -105,7 +105,7 @@ const app = new Vue({
 			// functional way
 
 			api.deleteExpense(id)
-				.then(() => this.expenses = this.expenses.filter(expense => expense.id !== id))
+				.then(() => this.expenses = this.expenses.filter(expense => expense._id !== id))
 
 
 			// imperative way

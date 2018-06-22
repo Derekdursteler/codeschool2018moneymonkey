@@ -66,8 +66,8 @@
 						{{ expense.date }}
 					</td>
 					<td>
-						<button @click="setEditingId(expense.id)">Edit</button>
-						<button class="delete" @click="deleteExpense(expense.id)">Delete</button>
+						<button @click="setEditingId(expense._id)">Edit</button>
+						<button class="delete" @click="deleteExpense(expense._id)">Delete</button>
 					</td>
 				</tr>
 			</table>
