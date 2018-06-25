@@ -11,6 +11,11 @@ const data = {
 	expenses: [],
 	headers: [
 	{
+		text: 'Selected',
+		align: 'left',
+		sortable: false,
+	},
+	{
 		text: 'Description',
 		align: 'left',
 		sortable: false,
