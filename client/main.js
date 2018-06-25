@@ -10,11 +10,13 @@ const app = new Vue({
 			.catch(e => console.log(e))
 	},
 	watch: {
-		description() {
-			this.valid.description = true
+		description(val) {
+			if (val !== '')
+				this.valid.description = this.validDescription()
 		},
-		amount() {
-			this.valid.amount = true
+		amount(val) {
+			if (val !== '')
+				this.valid.amount = this.validAmount()
 		},
 	},
 	computed: {
@@ -36,6 +38,12 @@ const app = new Vue({
 		}
 	},
 	methods: {
+		validAmount() {
+			return this.amount !== '' && /^[^,]([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+		},
+		validDescription() {
+			return this.description !== ''
+		},
 		setEditingId(id) {
 			this.expenseId = id
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
@@ -48,8 +56,8 @@ const app = new Vue({
 		},
 		isValid() {
 			this.valid = {
-				description: Boolean(this.description),
-				amount: this.amount !== '' && /^[^,]([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+				description: this.validDescription(),
+				amount: this.validAmount(),
 			}
 
 			for(const key in this.valid) {

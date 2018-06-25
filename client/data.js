@@ -42,7 +42,7 @@ const data = {
 	{
 		text: 'Actions',
 		align: 'left',
-		value: ''
+		value: '',
 	},
 	]
 }
