@@ -35,6 +35,8 @@
 
 							<v-btn color="info" @click="saveExpense">{{ saveButtonText }}</v-btn>
 
+							<v-btn v-if="clearButtonVisible" color="error" @click="clear">Clear</v-btn>
+
 							<v-alert :value="!valid.description" type="error">
 								Enter valid description
 							</v-alert>

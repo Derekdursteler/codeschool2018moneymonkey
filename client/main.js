@@ -27,6 +27,12 @@ const app = new Vue({
 		},
 		saveButtonText() {
 			return this.expenseId === null ? 'Add Expense' : 'Update Expense'
+		},
+		clearButtonVisible() {
+			if (this.description !== '' || this.amount !== '' || this.quantity !== '1' || this.expenseId !== null)
+				return true
+			else
+				return false
 		}
 	},
 	methods: {
