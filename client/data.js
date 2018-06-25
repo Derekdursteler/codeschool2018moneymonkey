@@ -3,6 +3,7 @@ const data = {
 	description: '',
 	amount: '',
 	quantity: '1',
+	loading: true,
 	expenseId: null,
 	valid: {
 		description: true,
@@ -43,6 +44,7 @@ const data = {
 		text: 'Actions',
 		align: 'left',
 		value: '',
+		sortable: false,
 	},
 	]
 }

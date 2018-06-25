@@ -6,7 +6,10 @@ const app = new Vue({
 	data,
 	created() {
 		api.getExpenses()
-			.then(expenses => this.expenses = expenses.reverse())
+			.then(expenses => {
+				this.expenses = expenses.reverse()
+				this.loading = false
+			})
 			.catch(e => console.log(e))
 	},
 	watch: {
