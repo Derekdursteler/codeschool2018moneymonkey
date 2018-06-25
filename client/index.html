@@ -61,7 +61,7 @@
 								<td class="text-xs-left"><b>{{ props.item.quantity }}</b></td>
 								<td class="text-xs-left"><b>{{ props.item.date }}</b></td>
 								<td>
-									<v-btn fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
+									<v-btn outline fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
 									<v-btn outline fab small color="error" @click="deleteExpense(props.item._id)"><v-icon>delete</v-icon></v-btn>
 								</td>
 							</template>
