@@ -26,10 +26,14 @@
 
 						<h1>{{ message }}</h1>
 
-						<v-form class="ma-5">
-							<v-text-field></v-text-field>
-							<v-text-field></v-text-field>
-							<v-btn color="info">Save Expense</v-btn>
+						<v-form class="ma-5" @keyup.native.enter="saveExpense">
+							<v-text-field v-model="description" ref="descriptionRef" placeholder="Description" type="text"></v-text-field>
+							<v-text-field v-model="amount" ref="amountRef" placeholder="Amount" type="text"></v-text-field>
+							<input type="number" v-model="quantity">
+							<br />
+							<br />
+
+							<v-btn color="info" @click="saveExpense">{{ saveButtonText }}</v-btn>
 
 							<v-alert :value="!valid.description" type="error">
 								Enter valid description
@@ -52,8 +56,8 @@
 								<td class="text-xs-left"><b>{{ props.item.quantity }}</b></td>
 								<td class="text-xs-left"><b>{{ props.item.date }}</b></td>
 								<td>
-									<v-btn fab small><v-icon>edit</v-icon></v-btn>
-									<v-btn outline fab small color="error"><v-icon>delete</v-icon></v-btn>
+									<v-btn fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
+									<v-btn outline fab small color="error" @click="deleteExpense(props.item._id)"><v-icon>delete</v-icon></v-btn>
 								</td>
 							</template>
 						</v-data-table>
@@ -62,73 +66,6 @@
 				</v-content>
 
 			</v-app>
-
-		</div>
-
-			{{ message }}
-
-			<h2>Expenses</h2>
-
-		<div class="row">
-
-		<form @submit.prevent>
-
-			<input ref="descriptionRef" v-model="description" type="text" placeholder="Description">
-
-			<input ref="amountRef" v-model="amount" type="text" placeholder="Amount">
-
-			<input v-model="quantity" type="number" placeholder="Quantity" min="1" max="99">
-
-			<div v-cloak class="error" v-if="!valid.description">
-				<b>Enter a valid description</b>
-			</div>
-
-			<div v-cloak class="error" v-if="!valid.amount">
-				<b>Enter a valid amount</b>
-			</div>
-
-		<button @click="saveExpense">Save Item</button>
-		<button @click="clear">Clear</button>
-
-		</form>
-
-		<div id="total-wrapper">
-			<h2>Total Expenses<h2><span id="total">${{ total }}</span></h2>
-		</div>
-
-		</div>
-
-		<div id="expenses" v-if="expenses.length">
-
-			<table>
-				<tr>
-					<th>Description</th>
-					<th>Amount</th>
-					<th>Quantity</th>
-					<th>Date</th>
-					<th>Actions</th>
-				</tr>
-				<tr v-for="expense in expenses">
-					<td>
-						{{ expense.description }}
-					</td>
-					<td>
-						${{ expense.amount.toLocaleString() }}
-					</td>
-					<td>
-						{{ expense.quantity }}
-					</td>
-					<td>
-						{{ expense.date }}
-					</td>
-					<td>
-						<button @click="setEditingId(expense._id)">Edit</button>
-						<button class="delete" @click="deleteExpense(expense._id)">Delete</button>
-					</td>
-				</tr>
-			</table>
-
-		</div>
 
 		</div>
 

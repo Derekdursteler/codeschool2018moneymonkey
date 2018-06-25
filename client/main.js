@@ -24,6 +24,9 @@ const app = new Vue({
 				.reduce((total, expense) =>
 					total + expense.amount * expense.quantity, 0)
 				.toLocaleString()
+		},
+		saveButtonText() {
+			return this.expenseId === null ? 'Add Expense' : 'Update Expense'
 		}
 	},
 	methods: {
