@@ -66,6 +66,9 @@ const app = new Vue({
 			this.quantity = expense.quantity
 
 		},
+		setDeletingId(id) {
+			this.deletingId = id
+		},
 		isValid() {
 			this.valid = {
 				description: this.validDescription(),
@@ -138,9 +141,14 @@ const app = new Vue({
 					this.expenseId = null
 				})
 		},
-		deleteExpense(id) {
-			api.deleteExpense(id)
-				.then(() => this.expenses = this.expenses.filter(expense => expense._id !== id))
+		deleteExpense() {
+			const indexOfExpense = this.expenses.findIndex(expense => expense._id === this.deletingId)
+			console.log(this.expenses[indexOfExpense].description)
+			api.deleteExpense(this.deletingId)
+				.then(() => {
+					this.expenses = this.expenses.filter(expense => expense._id !== this.deletingId)
+					this.deletingId = null
+				})
 		},
 		clear() {
 			this.description = ''

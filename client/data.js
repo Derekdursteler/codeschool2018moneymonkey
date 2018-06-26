@@ -4,6 +4,7 @@ const data = {
 	amount: '',
 	quantity: '1',
 	theme: 'light',
+	deletingId: null,
 	loading: true,
 	expenseId: null,
 	valid: {

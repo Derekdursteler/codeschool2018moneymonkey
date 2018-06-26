@@ -65,26 +65,28 @@
 								<td class="text-xs-left"><b>{{ props.item.quantity }}</b></td>
 								<td class="text-xs-left"><b>{{ props.item.date }}</b></td>
 								<td>
-								<v-tooltip bottom>
-      								<span slot="activator">
-      									<v-btn outline fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
-      								</span>
-      								<span>Edit</span>
-    							</v-tooltip>
-    							<v-tooltip bottom>
-      								<span slot="activator">
-      									<v-btn outline fab small color="info" @click="duplicateExpense(props.item._id)"><v-icon>file_copy</v-icon></v-btn>
-      								</span>
-      								<span>Duplicate</span>
-    							</v-tooltip>
-    							<v-tooltip bottom>
-      								<span slot="activator">
-      									<v-btn outline fab small color="error" @click="deleteExpense(props.item._id)"><v-icon>delete</v-icon></v-btn>
-      								</span>
-      								<span>Delete</span>
-    							</v-tooltip>
-									
-									
+									<v-tooltip bottom>
+	      								<span slot="activator">
+	      									<v-btn outline fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
+	      								</span>
+	      								<span>Edit</span>
+	    							</v-tooltip>
+	    							<v-tooltip bottom>
+	      								<span slot="activator">
+	      									<v-btn outline fab small color="info" @click="duplicateExpense(props.item._id)"><v-icon>file_copy</v-icon></v-btn>
+	      								</span>
+	      								<span>Duplicate</span>
+	    							</v-tooltip>
+	    							<v-tooltip bottom>
+	      								<span slot="activator">
+	      									<v-btn outline fab small color="error" @click="setDeletingId(props.item._id)"><v-icon>delete</v-icon></v-btn>
+	      								</span>
+	      								<span>Delete</span>
+	    							</v-tooltip>
+	    							<v-dialog :value="deletingId" persistent>
+	    								<v-btn color="info" @click="setDeletingId(null)">Cancel</v-btn>
+										<v-btn color="error" @click="deleteExpense">Confirm</v-btn>
+     								</v-dialog>
 								</td>
 							</template>
 						</v-data-table>
