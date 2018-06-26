@@ -55,7 +55,7 @@
 							<v-chip color="green" text-color="white">${{ total }}</v-chip>
 						</h2>
 
-						<v-data-table :loading="loading" :headers="headers" :items="expenses" class="elevation-1" hide-actions>
+						<v-data-table :loading="loading" :no-data-text="loadingText" :headers="headers" :items="expenses" class="elevation-1" hide-actions>
 							<template slot="items" slot-scope="props">
 								<td class="text-xs-left">
 									<v-icon v-if="expenseId === props.item._id">edit</v-icon>
@@ -65,8 +65,26 @@
 								<td class="text-xs-left"><b>{{ props.item.quantity }}</b></td>
 								<td class="text-xs-left"><b>{{ props.item.date }}</b></td>
 								<td>
-									<v-btn outline fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
-									<v-btn outline fab small color="error" @click="deleteExpense(props.item._id)"><v-icon>delete</v-icon></v-btn>
+								<v-tooltip bottom>
+      								<span slot="activator">
+      									<v-btn outline fab small @click="setEditingId(props.item._id)"><v-icon>edit</v-icon></v-btn>
+      								</span>
+      								<span>Edit</span>
+    							</v-tooltip>
+    							<v-tooltip bottom>
+      								<span slot="activator">
+      									<v-btn outline fab small color="info" @click="duplicateExpense(props.item._id)"><v-icon>file_copy</v-icon></v-btn>
+      								</span>
+      								<span>Duplicate</span>
+    							</v-tooltip>
+    							<v-tooltip bottom>
+      								<span slot="activator">
+      									<v-btn outline fab small color="error" @click="deleteExpense(props.item._id)"><v-icon>delete</v-icon></v-btn>
+      								</span>
+      								<span>Delete</span>
+    							</v-tooltip>
+									
+									
 								</td>
 							</template>
 						</v-data-table>

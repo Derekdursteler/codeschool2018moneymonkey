@@ -41,6 +41,9 @@ const app = new Vue({
 		},
 		dark() {
 			return this.theme === 'dark'
+		},
+		loadingText() {
+			return this.loading ? 'Loading Expenses' : 'No Expenses ;('
 		}
 	},
 	methods: {
@@ -101,6 +104,14 @@ const app = new Vue({
 				this.quantity = '1'
 				this.$refs.descriptionRef.focus()
 			}
+		},
+		duplicateExpense(id) {
+			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
+			const expense = this.expenses[indexOfExpense]
+			
+			api.addExpense({ ...expense })
+				.then(expense => this.expenses.unshift(expense))
+				.catch(e => console.log(e))
 		},
 		addExpense() {
 			const expense = {
