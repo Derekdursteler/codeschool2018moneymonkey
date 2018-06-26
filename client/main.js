@@ -48,7 +48,7 @@ const app = new Vue({
 			this.theme = theme
 		},
 		validAmount() {
-			return this.amount !== '' && /^((,|_|[a-zA-Z])!)([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+			return this.amount !== '' && /^[^,]([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
 		},
 		validDescription() {
 			return this.description !== ''
