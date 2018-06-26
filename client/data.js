@@ -3,6 +3,7 @@ const data = {
 	description: '',
 	amount: '',
 	quantity: '1',
+	theme: 'light',
 	loading: true,
 	expenseId: null,
 	valid: {

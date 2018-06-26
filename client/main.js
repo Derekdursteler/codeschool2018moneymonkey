@@ -38,11 +38,17 @@ const app = new Vue({
 				return true
 			else
 				return false
+		},
+		dark() {
+			return this.theme === 'dark'
 		}
 	},
 	methods: {
+		setTheme(theme) {
+			this.theme = theme
+		},
 		validAmount() {
-			return this.amount !== '' && /^[^,]([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
+			return this.amount !== '' && /^((,|_|[a-zA-Z])!)([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
 		},
 		validDescription() {
 			return this.description !== ''
@@ -135,6 +141,8 @@ const app = new Vue({
 		}
 	}
 })
+
+
 
 setTimeout(() => {
 	app.message = 'Record an expense'
