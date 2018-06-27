@@ -32,6 +32,15 @@
 				<v-content>
 					<v-container>
 
+					<v-snackbar
+						top
+						:color="snackColor"
+				      	:timeout="2000"
+				      	v-model="snackbar"
+    				>
+    					{{ snackText }}
+    				</v-snackbar>
+
 						<h1>{{ message }}</h1>
 
 						<v-form class="ma-5" @keyup.native.enter="saveExpense">

@@ -47,6 +47,11 @@ const app = new Vue({
 		}
 	},
 	methods: {
+		showSnack(message, color) {
+			this.snackColor = color
+			this.snackText = message
+			this.snackbar = true
+		},
 		setTheme(theme) {
 			/*
 			const themeMap = {
@@ -91,10 +96,6 @@ const app = new Vue({
 
 			for(const key in this.valid) {
 				if (!this.valid[key]) {
-					const refString = key + 'Ref'
-					const ref = this.$refs[refString]
-					ref.select()
-					
 					return false
 				}
 			}
@@ -116,9 +117,6 @@ const app = new Vue({
 					this.addExpense()
 
 				}
-				this.description = ''
-				this.amount = ''
-				this.quantity = '1'
 				this.$refs.descriptionRef.focus()
 			}
 		},
@@ -128,7 +126,8 @@ const app = new Vue({
 			
 			api.addExpense({ ...expense })
 				.then(expense => this.expenses.unshift(expense))
-				.catch(e => console.log(e))
+				.then(() => this.showSnack('Duplicated Expense', 'green'))
+				.catch(e => this.showSnack('Failed to duplicate', 'red'))
 		},
 		addExpense() {
 			const expense = {
@@ -138,7 +137,9 @@ const app = new Vue({
 			}
 			api.addExpense(expense)
 				.then(expense => this.expenses.unshift(expense))
-				.catch(e => console.log(e))
+				.then(this.clear)
+				.then(() => this.showSnack('Added Expense', 'green'))
+				.catch(e => this.showSnack('Failed to add', 'red'))
 		},
 		updateExpense(id) {
 			const updatedExpense = {
@@ -154,6 +155,9 @@ const app = new Vue({
 					this.expenses.splice(indexOfExpense, 1, expense)
 					this.expenseId = null
 				})
+				.then(this.clear)
+				.then(() => this.showSnack('Updated Expense', 'green'))
+				.catch(e => this.showSnack('Failed to update', 'red'))
 		},
 		deleteExpense() {
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === this.deletingId)
@@ -163,6 +167,8 @@ const app = new Vue({
 					this.expenses = this.expenses.filter(expense => expense._id !== this.deletingId)
 					this.deletingId = null
 				})
+				.then(() => this.showSnack('Deleted Expense', 'green'))
+				.catch(e => this.showSnack('Failed to delete', 'red'))
 		},
 		clear() {
 			this.description = ''

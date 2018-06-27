@@ -5,6 +5,9 @@ const data = {
 	quantity: '1',
 	theme: 'light',
 	deletingId: null,
+	snackbar: false,
+	snackText: '',
+	snackColor: 'green',
 	loading: true,
 	expenseId: null,
 	valid: {
