@@ -96,11 +96,15 @@
 	      								</span>
 	      								<span>Delete</span>
 	    							</v-tooltip>
-	    							<v-dialog :value="deletingId" persistent>
-	    								<v-layout row justify-center>
-	    									<v-btn color="info" @click="setDeletingId(null)">Cancel</v-btn>
-											<v-btn color="error" @click="deleteExpense">Confirm</v-btn>
-										</v-layout>
+	    							<v-dialog :value="deletingId" persistent max-width="300">
+										<v-card>
+        									<v-card-title class="headline">Are you sure?</v-card-title>
+        									<v-card-actions>
+	          									<v-spacer></v-spacer>
+												<v-btn color="info" @click="setDeletingId(null)">Cancel</v-btn>
+												<v-btn color="error" @click="deleteExpense">Confirm</v-btn>
+										    </v-card-actions>
+										</v-card>
      								</v-dialog>
 								</td>
 							</template>
