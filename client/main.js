@@ -48,6 +48,20 @@ const app = new Vue({
 	},
 	methods: {
 		setTheme(theme) {
+			/*
+			const themeMap = {
+				'green': {
+					primary: '#005500',
+					info: '#00ff00'
+				},
+				'red': {
+					primary: '#550000',
+					info: '#ff0000'
+				}
+			}
+
+			this.$vuetify.theme = themeMap[theme]
+			*/
 			this.theme = theme
 		},
 		validAmount() {

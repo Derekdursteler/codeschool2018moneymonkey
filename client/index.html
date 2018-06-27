@@ -16,13 +16,17 @@
 				<v-toolbar app>
 					<v-toolbar-side-icon>
 						<v-avatar>
-							<img :class="{inverted: this.theme === 'dark'}" width="100" height="100" src="https://cdn4.iconfinder.com/data/icons/hana-emojis-monkey-edition-glyph/100/monkey_glyph-22-512.png" alt="avatar">
+							<img :class="{inverted: theme === 'dark'}" width="100" height="100" src="https://cdn4.iconfinder.com/data/icons/hana-emojis-monkey-edition-glyph/100/monkey_glyph-22-512.png" alt="avatar">
 						</v-avatar>
 					</v-toolbar-side-icon>
 					<v-spacer></v-spacer>
 					<h4>Theme:</h4>
 					<v-chip color="white" @click="setTheme('light')"></v-chip>
 					<v-chip color="black" @click="setTheme('dark')"></v-chip>
+					<!--
+					<v-chip color="green" @click="setTheme('green')"></v-chip>
+					<v-chip color="red" @click="setTheme('red')"></v-chip>
+					-->
 				</v-toolbar>
 
 				<v-content>
@@ -31,8 +35,8 @@
 						<h1>{{ message }}</h1>
 
 						<v-form class="ma-5" @keyup.native.enter="saveExpense">
-							<v-text-field v-model="description" ref="descriptionRef" placeholder="Description" type="text"></v-text-field>
-							<v-text-field v-model="amount" ref="amountRef" placeholder="Amount" type="text"></v-text-field>
+							<v-text-field :class="{'error-textbox': !valid.description}" v-model="description" ref="descriptionRef" placeholder="Description" type="text"></v-text-field>
+							<v-text-field :class="{'error-textbox': !valid.amount}"v-model="amount" ref="amountRef" placeholder="Amount" type="text"></v-text-field>
 							<input type="number" v-model="quantity">
 							<br />
 							<br />
@@ -84,8 +88,10 @@
 	      								<span>Delete</span>
 	    							</v-tooltip>
 	    							<v-dialog :value="deletingId" persistent>
-	    								<v-btn color="info" @click="setDeletingId(null)">Cancel</v-btn>
-										<v-btn color="error" @click="deleteExpense">Confirm</v-btn>
+	    								<v-layout row justify-center>
+	    									<v-btn color="info" @click="setDeletingId(null)">Cancel</v-btn>
+											<v-btn color="error" @click="deleteExpense">Confirm</v-btn>
+										</v-layout>
      								</v-dialog>
 								</td>
 							</template>
